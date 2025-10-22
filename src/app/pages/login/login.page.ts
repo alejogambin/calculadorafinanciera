@@ -1,30 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {Router} from '@angular/router';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonInput,
-  IonItem,
-  IonButton,
-  IonCard,
+import { Router } from '@angular/router';
+import { 
+  IonContent, 
+  IonCard, 
+  IonCardHeader, 
+  IonCardTitle, 
+  IonCardSubtitle, 
   IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
+  IonItem,
+  IonInput,
+  IonButton,
   IonIcon,
   IonText
 } from '@ionic/angular/standalone';
-import {
-  calculatorOutline,
+import { 
+  calculatorOutline, 
   walletOutline,
-  logInOutline,
   mailOutline,
   lockClosedOutline,
-  keyOutline
+  keyOutline,
+  logInOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -33,25 +30,22 @@ import {
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
+    CommonModule, 
+    FormsModule, 
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
-    IonButton,
-    IonInput,
-    IonItem,
     IonCard,
-    IonCardContent,
     IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
+    IonCardContent,
+    IonItem,
+    IonInput,
+    IonButton,
     IonIcon,
     IonText
   ]
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   
   // Iconos para el logo
   calculatorIcon = calculatorOutline;
@@ -65,14 +59,19 @@ export class LoginPage implements OnInit {
   // Iconos para recuperación de contraseña
   keyIcon = keyOutline;
 
-
+  // Campos del formulario
+  email: string = '';
+  password: string = '';
 
   constructor(private router:Router) { }
 
-  ngOnInit() {
-  }
-
   login(){
-    this.router.navigate(['/home']);
+    console.log('login() called', { email: this.email, password: this.password });
+    // simulate validation
+    if(!this.email || !this.password){
+      console.warn('Email o password vacíos');
+      return;
+    }
+    this.router.navigate(['/home']).then(result => console.log('navigate result:', result)).catch(err => console.error('navigate error:', err));
   }
 }

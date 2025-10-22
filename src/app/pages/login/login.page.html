@@ -27,7 +27,7 @@
               <ion-icon [icon]="mailIcon" slot="start" color="primary"></ion-icon>
               <ion-input label="Correo electrónico" labelPlacement="floating" type="email" fill="outline"
                 placeholder="ejemplo@gmail.com" helperText="Ingresa un correo válido" errorText="Correo inválido"
-                ngModel email class="custom-input">
+                [(ngModel)]="email" name="email" class="custom-input">
               </ion-input>
             </ion-item>
 
@@ -35,7 +35,7 @@
             <ion-item lines="none" class="form-item">
               <ion-icon [icon]="lockIcon" slot="start" color="primary"></ion-icon>
               <ion-input label="Contraseña" labelPlacement="floating" type="password" fill="outline"
-                placeholder="••••••••" [counter]="true" maxlength="20" class="custom-input">
+                placeholder="••••••••" [counter]="true" maxlength="20" [(ngModel)]="password" name="password" class="custom-input">
               </ion-input>
             </ion-item>
 
@@ -50,7 +50,7 @@
             </div>
 
             <!-- Login Button -->
-            <ion-button (click)="login()" expand="block" fill="solid" class="login-button" >
+            <ion-button type="button" (click)="login()" expand="block" fill="solid" class="login-button" >
               <ion-icon [icon]="loginIcon" slot="start"></ion-icon>
               Iniciar Sesión
             </ion-button>
