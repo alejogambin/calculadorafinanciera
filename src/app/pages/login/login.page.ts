@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { 
-  IonContent, 
-  IonCard, 
-  IonCardHeader, 
-  IonCardTitle, 
-  IonCardSubtitle, 
+import {
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
   IonCardContent,
   IonItem,
   IonInput,
@@ -15,8 +15,8 @@ import {
   IonIcon,
   IonText
 } from '@ionic/angular/standalone';
-import { 
-  calculatorOutline, 
+import {
+  calculatorOutline,
   walletOutline,
   mailOutline,
   lockClosedOutline,
@@ -30,8 +30,8 @@ import {
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     IonContent,
     IonCard,
     IonCardHeader,
@@ -46,7 +46,7 @@ import {
   ]
 })
 export class LoginPage {
-  
+
   // Iconos para el logo
   calculatorIcon = calculatorOutline;
   walletIcon = walletOutline;
@@ -63,15 +63,18 @@ export class LoginPage {
   email: string = '';
   password: string = '';
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
-  login(){
-    console.log('login() called', { email: this.email, password: this.password });
-    // simulate validation
-    if(!this.email || !this.password){
+  login() {
+    //  validation
+    if (!this.email || !this.password) {
       console.warn('Email o password vacíos');
       return;
     }
-    this.router.navigate(['/home']).then(result => console.log('navigate result:', result)).catch(err => console.error('navigate error:', err));
+    this.router.navigate(['/home']);
+  }
+  register(){
+    console.log('Navigating to registro page');
+    this.router.navigate(['/registro']);
   }
 }
