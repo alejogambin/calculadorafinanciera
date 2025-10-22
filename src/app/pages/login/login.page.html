@@ -1,13 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <!-- Logo Section -->
+    <div class="brand-section ion-text-center">
+      <div class="app-logo">
+        <div class="logo-container">
+          <ion-icon [icon]="calculatorIcon" class="calculator-icon"></ion-icon>
+          <ion-icon [icon]="walletIcon" class="wallet-icon"></ion-icon>
+        </div>
+        <h1 class="brand-name">Calculadora Financiera</h1>
+        <p class="brand-slogan">Gestiona tus finanzas de manera inteligente</p>
+      </div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Login Form Section -->
+    <div class="login-form">
+      <ion-card class="form-card">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Bienvenido</ion-card-title>
+          <ion-card-subtitle class="ion-text-center">Ingresa a tu cuenta</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <form class="form-content">
+            <!-- Email Input -->
+            <ion-item lines="none" class="form-item">
+              <ion-icon [icon]="mailIcon" slot="start" color="primary"></ion-icon>
+              <ion-input label="Correo electrónico" labelPlacement="floating" type="email" fill="outline"
+                placeholder="ejemplo@gmail.com" helperText="Ingresa un correo válido" errorText="Correo inválido"
+                ngModel email class="custom-input">
+              </ion-input>
+            </ion-item>
+
+            <!-- Password Input -->
+            <ion-item lines="none" class="form-item">
+              <ion-icon [icon]="lockIcon" slot="start" color="primary"></ion-icon>
+              <ion-input label="Contraseña" labelPlacement="floating" type="password" fill="outline"
+                placeholder="••••••••" [counter]="true" maxlength="20" class="custom-input">
+              </ion-input>
+            </ion-item>
+
+            <!-- Forgot Password Link -->
+            <div class="forgot-password ion-text-end">
+              <ion-text color="medium">
+                <a class="link-button">
+                  <ion-icon [icon]="keyIcon"></ion-icon>
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </ion-text>
+            </div>
+
+            <!-- Login Button -->
+            <ion-button (click)="login()" expand="block" fill="solid" class="login-button" >
+              <ion-icon [icon]="loginIcon" slot="start"></ion-icon>
+              Iniciar Sesión
+            </ion-button>
+
+            <!-- Register Link -->
+            <div class="register-prompt ion-text-center">
+              <ion-text color="medium">¿No tienes una cuenta?</ion-text>
+              <ion-text color="primary">
+                <a class="link-button"> Regístrate aquí</a>
+              </ion-text>
+            </div>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
