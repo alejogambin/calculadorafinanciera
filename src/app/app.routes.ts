@@ -22,4 +22,12 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
   },
+  {
+    path: 'calculadora',
+    loadComponent: () => import('./pages/calculadora/calculadora.page').then( m => m.CalculadoraPage)
+  },
+  {
+    path: 'guardados',
+    loadComponent: () => import('./pages/guardados/guardados.page').then( m => m.GuardadosPage)
+  },
 ];
