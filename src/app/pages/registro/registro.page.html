@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true" class="modal-content">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ion-list lines="full" class="ion-padding">
-
+      <h1 class="ion-text-center ">REGISTRO</h1>
       <!-- Nombre -->
       <ion-item>
         <ion-label position="stacked">Nombre completo</ion-label>
-        <ion-input formControlName="name" placeholder="Tu nombre" inputmode="text" autocomplete="name"></ion-input>
+        <ion-input formControlName="name" placeholder="Nombre" inputmode="text" autocomplete="name"></ion-input>
       </ion-item>
       <ion-note color="danger" *ngIf="f['name'].touched && f['name'].invalid">
         Nombre requerido (mínimo 3 caracteres)
