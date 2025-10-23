@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent} from '@ionic/angular/standalone';
-
+import { IonIcon,IonTabBar,IonTabButton,IonTabs,IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {folderOpenOutline,calculatorOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard , IonButton, IonCardHeader,IonCardTitle, IonCardSubtitle, IonCardContent],
+  imports: [IonIcon,IonTabBar,IonTabButton,IonTabs,IonHeader, IonToolbar, IonTitle, IonContent, IonCard , IonButton, IonCardHeader,IonCardTitle, IonCardSubtitle, IonCardContent],
 })
 export class HomePage {
-  constructor() {}
+  constructor() {
+    addIcons({folderOpenOutline,calculatorOutline});
+  }
 }
