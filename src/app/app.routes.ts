@@ -15,11 +15,11 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   {
-    path: '**',
-    redirectTo: 'login',
-  },
-  {
     path: 'registro',
     loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];

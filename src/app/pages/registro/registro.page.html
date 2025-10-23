@@ -1,13 +1,57 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="modal-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list lines="full" class="ion-padding">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <!-- Nombre -->
+      <ion-item>
+        <ion-label position="stacked">Nombre completo</ion-label>
+        <ion-input formControlName="name" placeholder="Tu nombre" inputmode="text" autocomplete="name"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="f['name'].touched && f['name'].invalid">
+        Nombre requerido (mínimo 3 caracteres)
+      </ion-note>
+
+      <!-- Correo -->
+      <ion-item>
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input formControlName="email" placeholder="ejemplo@correo.com" type="email" autocomplete="email"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="f['email'].touched && f['email'].invalid">
+        Ingresa un correo válido
+      </ion-note>
+
+      <!-- Contraseña -->
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Crea una contraseña segura" autocomplete="new-password"></ion-input>
+        <ion-button fill="clear" slot="end" size="small" (click)="togglePassword()" aria-label="Mostrar u ocultar contraseña">
+        </ion-button>
+      </ion-item>
+      <ion-note color="danger" *ngIf="f['password'].touched && f['password'].invalid">
+        Mínimo 6 caracteres
+      </ion-note>
+
+      <!-- Edad -->
+      <ion-item>
+        <ion-label position="stacked">Edad</ion-label>
+        <ion-input formControlName="age" placeholder="Tu edad" type="number" inputmode="numeric" min="1"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="f['age'].touched && f['age'].invalid">
+        Edad requerida
+      </ion-note>
+    </ion-list>
+  </form>
 </ion-content>
+
+<ion-footer>
+  <ion-grid class="modal-actions ion-padding">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" color="medium" (click)="onCancel()">Cancelar</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" color="primary" [disabled]="form.invalid" type="submit">Crear cuenta</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
