@@ -1,38 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      calculadora financiera
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="app-toolbar">
+    <ion-buttons class="nav-buttons">
+      <ion-button class="nav-button"  (click)="calculadora()" >
+        <ion-icon [icon]="calculatorIcon"></ion-icon>
+        <small>Calcular</small>
+      </ion-button>
+      
+      <ion-button class="nav-button" (click)="guardados()" >
+        <ion-icon [icon]="folderIcon"></ion-icon>
+        <small>Guardados</small>
+      </ion-button>
+      
+      <ion-button class="nav-button" (click)="perfil()">
+        <ion-icon [icon]="profileIcon"></ion-icon>
+        <small>Perfil</small>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">calculadora financiera</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-   <ion-card class="welcome-card">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="content-container">
+    <ion-card class="main-card">
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Calculadora Financiera</ion-card-title>
-        <ion-card-subtitle>Tu asistente para cálculos financieros rápidos</ion-card-subtitle>
+        <h1 class="main-title">Calculadora Financiera</h1>
+        <p class="subtitle">Tu asistente para decisiones financieras inteligentes</p>
       </ion-card-header>
+
       <ion-card-content>
-        <p>Esta aplicación te ayuda a calcular intereses y guardar tus resultados para consultarlos después.</p>
+        <div class="feature-text">
+          <p>Calcula intereses, plazos y gestiona tus finanzas de manera eficiente.</p>
+          <p>Guarda tus cálculos y consúltalos cuando lo necesites.</p>
+        </div>
       </ion-card-content>
     </ion-card>
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="calculadora">
-      <ion-icon name="calculator-outline"></ion-icon>
-      calcular
-    </ion-tab-button>
-  </ion-tab-bar>
-  <ion-tab-button tab="guardados">
-    <ion-icon name="folder-open-outline"></ion-icon>
-    historial de calculos
-  </ion-tab-button>
-</ion-tabs>
+  </div>
 </ion-content>
-

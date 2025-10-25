@@ -1,0 +1,43 @@
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.intro-card {
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ion-item {
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+}
+
+ion-input {
+  font-size: 16px;
+}
+
+ion-select {
+  font-size: 16px;
+}
+
+ion-button {
+  margin-top: 16px;
+}
+
+.resultado-card {
+  margin-top: 24px;
+  border-radius: 12px;
+  background: var(--ion-color-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.feature-text p {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #444;
+}

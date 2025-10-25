@@ -19,10 +19,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
   },
   {
-    path: '**',
-    redirectTo: 'login',
-  },
-  {
     path: 'calculadora',
     loadComponent: () => import('./pages/calculadora/calculadora.page').then( m => m.CalculadoraPage)
   },
@@ -30,4 +26,12 @@ export const routes: Routes = [
     path: 'guardados',
     loadComponent: () => import('./pages/guardados/guardados.page').then( m => m.GuardadosPage)
   },
+  {
+    path: 'detallecalculomodal',
+    loadComponent: () => import('./pages/detallecalculomodal/detallecalculomodal.page').then( m => m.DetallecalculomodalPage)
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+  }
 ];

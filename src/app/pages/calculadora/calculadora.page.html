@@ -1,13 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>calculadora</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="calculator-container">
+    <!-- Título y descripción -->
+    <ion-card class="intro-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Calculadora Financiera</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">Selecciona el tipo de cálculo que deseas realizar</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">calculadora</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Selector de tipo de cálculo -->
+    <ion-item>
+      <ion-label>Tipo de cálculo</ion-label>
+      <ion-select [(ngModel)]="tipoCalculo" placeholder="Selecciona uno">
+        <ion-select-option value="prestamo">Préstamo</ion-select-option>
+        <ion-select-option value="hipoteca">Hipoteca</ion-select-option>
+        <ion-select-option value="ahorro">Ahorro</ion-select-option>
+        <ion-select-option value="inversion">Inversión</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Formulario dinámico según tipo -->
+    <ng-container [ngSwitch]="tipoCalculo">
+      <!-- Préstamo -->
+      <div *ngSwitchCase="'prestamo'">
+        <ion-item>
+          <ion-label position="floating">Monto del préstamo</ion-label>
+          <ion-input type="number" [(ngModel)]="montoPrestamo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tasa de interés (%)</ion-label>
+          <ion-input type="number" [(ngModel)]="interesPrestamo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Plazo (meses)</ion-label>
+          <ion-input type="number" [(ngModel)]="plazoPrestamo"></ion-input>
+        </ion-item>
+      </div>
+
+      <!-- Hipoteca -->
+      <div *ngSwitchCase="'hipoteca'">
+        <!-- Campos similares adaptados a hipoteca -->
+      </div>
+
+      <!-- Ahorro -->
+      <div *ngSwitchCase="'ahorro'">
+        <!-- Campos para ahorro -->
+      </div>
+
+      <!-- Inversión -->
+      <div *ngSwitchCase="'inversion'">
+        <!-- Campos para inversión -->
+      </div>
+    </ng-container>
+
+    <!-- Botón de calcular -->
+    <ion-button expand="block" color="primary" (click)="calcular()">
+      Calcular
+    </ion-button>
+    <ion-button expand="block" color="success" (click)="guardarCalculoEnguardados()" [disabled]="!resultado">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Guardar cálculo
+    </ion-button>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button color="primary" (click)="volver()">
+        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <!-- Resultado -->
+    <div *ngIf="resultado">
+      <ion-card class="resultado-card">
+        <ion-card-header>
+          <ion-card-title>Resultado</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ resultado }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
 </ion-content>

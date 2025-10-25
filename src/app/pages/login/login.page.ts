@@ -68,6 +68,7 @@ export class LoginPage {
 
   login() {
     //  validation
+    (document.activeElement as HTMLElement)?.blur();
     if (!this.email || !this.password) {
       console.warn('Email o password vacíos');
       return;
