@@ -48,6 +48,7 @@ export class HomePage {
   }
   guardados() {
     (document.activeElement as HTMLElement)?.blur();
+    console.log("Navegando a guardados");
     this.router.navigate(['/guardados']);
   } 
   perfil(){

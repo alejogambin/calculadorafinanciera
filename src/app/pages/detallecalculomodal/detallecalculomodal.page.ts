@@ -2,14 +2,14 @@ import { Component, Input, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonItem,IonLabel,IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-detallecalculomodal',
   templateUrl: './detallecalculomodal.page.html',
   styleUrls: ['./detallecalculomodal.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonItem,IonLabel,IonButtons]
 })
 export class DetallecalculomodalPage implements OnInit {
   ngOnInit() {

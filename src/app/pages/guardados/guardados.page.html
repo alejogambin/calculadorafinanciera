@@ -1,4 +1,11 @@
 <ion-content class="ion-padding">
+  <ion-card class="intro-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Cálculos Guardados</ion-card-title>
+      <ion-card-subtitle class="ion-text-center">Consulta y gestiona tus cálculos financieros guardados</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <!-- lista de claculos guardados -->
   <ion-list>
     <ion-item *ngFor="let item of calculos" (click)="abrirDetalle(item)">
       <ion-label>
@@ -8,5 +15,10 @@
       </ion-label>
     </ion-item>
   </ion-list>
+    <!--boton de retroceder-->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button color="primary" (click)="volver()">
+        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
-
