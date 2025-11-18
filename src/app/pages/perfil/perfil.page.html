@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-content>
+      <ion-button (click)="tomarFoto()">foto</ion-button>
+      <div *ngIf="imagenCapturada">
+        <h2>foto tomada:</h2>
+        <img [src]="imagenCapturada"/>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button color="primary" (click)="volver()">
+        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>

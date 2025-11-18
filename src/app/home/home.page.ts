@@ -53,6 +53,7 @@ export class HomePage {
   } 
   perfil(){
     (document.activeElement as HTMLElement)?.blur();
+    console.log("Navegando a perfil");
     this.router.navigate(['/perfil']);
   }
 }

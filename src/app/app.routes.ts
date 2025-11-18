@@ -30,6 +30,13 @@ export const routes: Routes = [
     path: 'detallecalculomodal',
     loadComponent: () => import('./pages/detallecalculomodal/detallecalculomodal.page').then( m => m.DetallecalculomodalPage)
   },
+  
+  {
+    path: 'perfil',
+    loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
+  },
+
+
   {
     path: '**',
     redirectTo: 'login',
