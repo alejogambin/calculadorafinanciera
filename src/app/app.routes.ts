@@ -35,10 +35,14 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
   },
-
+{
+    path: 'testapi',
+    loadComponent: () => import('./pages/testapi/testapi.page').then( m => m.TestapiPage)
+  },
 
   {
     path: '**',
     redirectTo: 'login',
-  }
+  },
+  
 ];

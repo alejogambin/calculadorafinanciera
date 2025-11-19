@@ -36,6 +36,8 @@ export class PerfilPage implements OnInit {
   }
   async tomarFoto() {
     try {
+      //const permisos = await Geolocation.requestPermissions();
+      //if (permisos.location === 'granted') {
       const foto = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
@@ -46,6 +48,10 @@ export class PerfilPage implements OnInit {
       this.imagenCapturada = foto.dataUrl;
       console.log('foto tomada con exito', foto);
       console.log('imagen en dataurl:', this.imagenCapturada);
+      /*}else{
+        console.log('permisos de camara denegados');
+        alert('Permisos de camara denegados');
+      }*/
     } catch (error) {
       console.log('Error al tomar la foto', error);
     }
