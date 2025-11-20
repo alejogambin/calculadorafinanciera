@@ -5,9 +5,10 @@ import { ModalController } from '@ionic/angular';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonButton, IonFab, IonIcon, IonFabButton, IonItem } from '@ionic/angular/standalone';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
-import { arrowBackOutline, mapOutline,locationOutline } from 'ionicons/icons';
+import { arrowBackOutline, mapOutline, locationOutline } from 'ionicons/icons';
 import { Geolocation } from '@capacitor/geolocation';
 import { FotocamaraStorageService, FotoCamara } from 'src/app/services/fotocamara-storage.service';
+import { GuardadubicacionStorageService, GuardadUbicacion } from 'src/app/services/guardadubicacion-storage-service';
 interface GPSLocation {
   latitude: number;
   longitude: number;
@@ -29,27 +30,38 @@ export class PerfilPage implements OnInit {
   ubicacion: GPSLocation | undefined;
   obteniendoUbicacion: boolean = false;
   arrowBackOutline = arrowBackOutline;
-  fotos: FotoCamara []= [];
-  constructor(private modalCtrl: ModalController, private router: Router, private fotoCamaraStorageService: FotocamaraStorageService) { }
+  fotos: FotoCamara[] = [];
+  ubicaciones: GuardadUbicacion[] = [];
+  constructor(private modalCtrl: ModalController, private router: Router, 
+    private fotoCamaraStorageService: FotocamaraStorageService,
+    private guardadubicacionStorageService: GuardadubicacionStorageService
+  ) { }
 
   async ngOnInit() {
     this.fotos = await this.fotoCamaraStorageService.obtnerFotos('agambin');
+    this.ubicaciones = await this.guardadubicacionStorageService.obtnerUb('agambin');
   }
   async tomarFoto() {
     try {
-      //const permisos = await Geolocation.requestPermissions();
-      //if (permisos.location === 'granted') {
+      const permisos = await Camera.checkPermissions();
+      if (permisos.camera !== 'granted') {
+        const nuevosPermisos = await Camera.requestPermissions();
+        if (nuevosPermisos.camera !== 'granted') {
+          console.log('Permisos de camara denegados');
+          alert('No se pueden tomar fotos sin permisos de camara');
+          return;
+        }
+      }
       const foto = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.DataUrl,
         source: CameraSource.Camera
-
-      })
+      });
       this.imagenCapturada = foto.dataUrl;
       console.log('foto tomada con exito', foto);
       console.log('imagen en dataurl:', this.imagenCapturada);
-      const nuevaFoto: FotoCamara ={
+      const nuevaFoto: FotoCamara = {
         nombreArchivo: `foto_${new Date().getTime()}.jpeg`,
         rutaArchivo: foto.webPath || '',
         fechaCaptura: new Date(),
@@ -58,51 +70,49 @@ export class PerfilPage implements OnInit {
       this.fotos.push(nuevaFoto);
       await this.fotoCamaraStorageService.guardarFoto('agambin', this.fotos);
       console.log('Foto guardad en almacenamiento local:', nuevaFoto);
-      /*}else{
-        console.log('permisos de camara denegados');
-        alert('Permisos de camara denegados');
-      }*/
-    } catch (error) {
-      console.log('Error al tomar la foto', error);
-    }
+    }catch(error) {
+    console.log('Error al tomar la foto', error);
+  }
 
-  }
+}
   async obtenerUbicacion() {
-    this.obteniendoUbicacion = true;
-    try {
-      //const permisos = await Geolocation.requestPermissions();
-      //if (permisos.location === 'granted') {
-        const posicion = await Geolocation.getCurrentPosition(
-          {
-            enableHighAccuracy: true,
-            timeout: 10000,
-          }
-        );
-        this.ubicacion = {
-          latitude: posicion.coords.latitude,
-          longitude: posicion.coords.longitude, 
-          accuracy: posicion.coords.accuracy,
-          timestamp: posicion.timestamp
+  this.obteniendoUbicacion = true;
+  try {
+    //const permisos = await Geolocation.requestPermissions();
+    //if (permisos.location === 'granted') {
+      const posicion = await Geolocation.getCurrentPosition(
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
         }
-        console.log('ubicacion onbtenida:', this.ubicacion);
-      /*}else{
-        console.log('permisos de ubicacion denegados');
-        alert('Permisos de ubicacion denegados');
-      }*/
-    } catch (e) {
-      console.log('Error al obtener la ubicacion', e);
-    }finally{
-      this.obteniendoUbicacion = false;
-    }
+      );
+      this.ubicacion = {
+        latitude: posicion.coords.latitude,
+        longitude: posicion.coords.longitude,
+        accuracy: posicion.coords.accuracy,
+        timestamp: posicion.timestamp
+      }
+      console.log('ubicacion onbtenida:', this.ubicacion);
+      this.ubicaciones.push(this.ubicacion);
+      await this.guardadubicacionStorageService.guardarUb('agambin', this.ubicaciones);
+    /*} else {
+      console.log('permisos de ubicacion denegados');
+      alert('Permisos de ubicacion denegados');
+    }*/
+  } catch (e) {
+    console.log('Error al obtener la ubicacion', e);
+  } finally {
+    this.obteniendoUbicacion = false;
   }
-  obtenerEnlaceMaps() : string{
-    if(this.ubicacion){
-      return `https://www.google.com/maps?q=${this.ubicacion.latitude},${this.ubicacion.longitude}`;
-    }
-    return '';
+}
+obtenerEnlaceMaps() : string{
+  if (this.ubicacion) {
+    return `https://www.google.com/maps?q=${this.ubicacion.latitude},${this.ubicacion.longitude}`;
   }
-  volver() {
-    (document.activeElement as HTMLElement)?.blur();
-    this.router.navigate(['/home']);
-  }
+  return '';
+}
+volver() {
+  (document.activeElement as HTMLElement)?.blur();
+  this.router.navigate(['/home']);
+}
 }

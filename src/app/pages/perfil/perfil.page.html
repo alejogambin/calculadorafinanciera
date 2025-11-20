@@ -40,6 +40,21 @@
       </ion-button>
     </div>
   </ion-item>
+    <ion-item>
+    <div  *ngFor="let ubicacion of ubicaciones" style="text-align: center; width:100%;">
+      <p><strong>Ubicacion gps guardadas</strong></p>
+      
+      <p><strong>Latitud:</strong>{{ ubicacion.latitude }}</p>
+      
+      <p><strong>Longitud:</strong>{{ ubicacion.longitude }}</p>
+      
+      <p><strong>Precision:</strong>{{ ubicacion.accuracy }} metros</p>
+      <ion-button size="small" fill="outline" [href]="obtenerEnlaceMaps()" target="_blank">
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        ver en Maps
+      </ion-button>
+    </div>
+  </ion-item>
   <ion-fab slot="fixed" vertical="bottom" horizontal="start">
       <ion-fab-button color="primary" (click)="volver()">
         <ion-icon [icon]="arrowBackOutline"></ion-icon>
