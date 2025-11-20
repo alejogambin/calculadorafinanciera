@@ -7,7 +7,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { arrowBackOutline, mapOutline,locationOutline } from 'ionicons/icons';
 import { Geolocation } from '@capacitor/geolocation';
-
+import { FotocamaraStorageService, FotoCamara } from 'src/app/services/fotocamara-storage.service';
 interface GPSLocation {
   latitude: number;
   longitude: number;
@@ -29,10 +29,11 @@ export class PerfilPage implements OnInit {
   ubicacion: GPSLocation | undefined;
   obteniendoUbicacion: boolean = false;
   arrowBackOutline = arrowBackOutline;
+  fotos: FotoCamara []= [];
+  constructor(private modalCtrl: ModalController, private router: Router, private fotoCamaraStorageService: FotocamaraStorageService) { }
 
-  constructor(private modalCtrl: ModalController, private router: Router) { }
-
-  ngOnInit() {
+  async ngOnInit() {
+    this.fotos = await this.fotoCamaraStorageService.obtnerFotos('agambin');
   }
   async tomarFoto() {
     try {
@@ -48,6 +49,15 @@ export class PerfilPage implements OnInit {
       this.imagenCapturada = foto.dataUrl;
       console.log('foto tomada con exito', foto);
       console.log('imagen en dataurl:', this.imagenCapturada);
+      const nuevaFoto: FotoCamara ={
+        nombreArchivo: `foto_${new Date().getTime()}.jpeg`,
+        rutaArchivo: foto.webPath || '',
+        fechaCaptura: new Date(),
+        base64Data: foto.dataUrl || ''
+      };
+      this.fotos.push(nuevaFoto);
+      await this.fotoCamaraStorageService.guardarFoto('agambin', this.fotos);
+      console.log('Foto guardad en almacenamiento local:', nuevaFoto);
       /*}else{
         console.log('permisos de camara denegados');
         alert('Permisos de camara denegados');

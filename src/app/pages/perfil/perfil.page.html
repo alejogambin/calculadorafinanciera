@@ -13,9 +13,9 @@
   <ion-card>
     <ion-card-content>
       <ion-button (click)="tomarFoto()">foto</ion-button>
-      <div *ngIf="imagenCapturada">
-        <h2>foto tomada:</h2>
-        <img [src]="imagenCapturada"/>
+      <div *ngFor ="let foto of fotos">
+        <h3> {{foto.nombreArchivo}} - {{foto.fechaCaptura | date :'short'}}</h3>
+        <img [src]="foto.base64Data" >
       </div>
     </ion-card-content>
   </ion-card>
