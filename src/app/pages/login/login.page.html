@@ -35,7 +35,8 @@
             <ion-item lines="none" class="form-item">
               <ion-icon [icon]="lockIcon" slot="start" color="primary"></ion-icon>
               <ion-input label="Contraseña" labelPlacement="floating" type="password" fill="outline"
-                placeholder="••••••••" [counter]="true" maxlength="20" [(ngModel)]="password" name="password" class="custom-input">
+                placeholder="••••••••" [counter]="true" maxlength="20" [(ngModel)]="password" name="password"
+                class="custom-input">
               </ion-input>
             </ion-item>
 
@@ -50,16 +51,22 @@
             </div>
 
             <!-- Login Button -->
-            <ion-button type="button" (click)="login()" expand="block" fill="solid" class="login-button" >
+            <ion-button type="button" (click)="login()" expand="block" fill="solid" class="login-button">
               <ion-icon [icon]="loginIcon" slot="start"></ion-icon>
               Iniciar Sesión
             </ion-button>
+            <ion-text color="danger" *ngIf="errorMessage">
+              <p class="ion-text-center ion-margin-top">
+                {{ errorMessage }}
+              </p>
+            </ion-text>
+
 
             <!-- Register Link -->
             <div class="register-prompt ion-text-center">
               <ion-text color="medium">¿No tienes una cuenta?</ion-text>
-              <ion-text color="primary" >
-                <a [routerLink]="['/registro']" class="link-button" > Regístrate aquí</a>
+              <ion-text color="primary">
+                <a [routerLink]="['/registro']" class="link-button"> Regístrate aquí</a>
               </ion-text>
             </div>
           </form>

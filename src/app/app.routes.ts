@@ -41,6 +41,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'api',
+    loadComponent: () => import('./pages/api/api.page').then( m => m.ApiPage)
+  },
+  
+  {
     path: '**',
     redirectTo: 'login',
   },
